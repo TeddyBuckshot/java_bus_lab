@@ -6,11 +6,16 @@ import static org.junit.Assert.assertEquals;
 public class BusTest {
     private Bus bus;
     private Person person;
+    private BusStop codeClan_BusStop;
 
     @Before
     public void before() {
-        bus = new Bus("Waverley", 2);
+        bus = new Bus("Waverley", 8);
         person = new Person();
+        codeClan_BusStop = new BusStop("CodeClan");
+        codeClan_BusStop.addPersonToQueue(person);
+        codeClan_BusStop.addPersonToQueue(person);
+        codeClan_BusStop.addPersonToQueue(person);
     }
 
     @Test
@@ -23,7 +28,7 @@ public class BusTest {
         bus.addPassenger(person);
         bus.addPassenger(person);
         bus.addPassenger(person);
-        assertEquals(2, bus.passengerCount());
+        assertEquals(3, bus.passengerCount());
     }
 
     @Test
@@ -31,6 +36,18 @@ public class BusTest {
         bus.addPassenger(person);
         bus.removePassenger();
         assertEquals(0, bus.passengerCount());
+    }
+
+    @Test
+    public void canPickUp(){
+        bus.addPassenger(person);
+        bus.addPassenger(person);
+        bus.addPassenger(person);
+        bus.pickUp(codeClan_BusStop);
+        bus.pickUp(codeClan_BusStop);
+        bus.pickUp(codeClan_BusStop);
+        assertEquals(6, bus.passengerCount());
+        assertEquals(0,codeClan_BusStop.getQueueSize());
     }
 
 }
