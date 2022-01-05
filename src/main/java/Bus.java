@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class Bus {
 
@@ -26,5 +27,10 @@ public class Bus {
 
     public void removePassenger(){
         this.passengers.remove(0);
+    }
+
+    public void pickUp(Queue queue){
+        Person person = queue.removePersonFromQueue();
+
     }
 }
